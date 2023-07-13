@@ -1,7 +1,10 @@
 namespace SpriteKind {
     export const estrella = SpriteKind.create()
+    export const municion = SpriteKind.create()
 }
 function inicio1 () {
+    velocidadFeo1 = 30
+    municion = 10
     info.setScore(0)
     info.setLife(3)
     scroller.setLayerImage(scroller.BackgroundLayer.Layer0, img`
@@ -310,79 +313,95 @@ function inicio1 () {
     )
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
-    torpedo = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . . 5 5 . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . 7 d d 7 . . . . . . 
-        . . . . . 7 7 d d 7 7 . . . . . 
-        . . . . . 7 7 d d 7 7 . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, falcon, 0, -68)
-    animation.runImageAnimation(
-    torpedo,
-    [img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . . 5 5 . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . 7 d d 7 . . . . . . 
-        . . . . . 7 7 d d 7 7 . . . . . 
-        . . . . . 7 7 d d 7 7 . . . . . 
-        . . . . . . . 2 5 . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . . 5 5 . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . . d d . . . . . . . 
-        . . . . . . 7 d d 7 . . . . . . 
-        . . . . . 7 7 d d 7 7 . . . . . 
-        . . . . . 7 7 d d 7 7 . . . . . 
-        . . . . . . . 5 2 . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `],
-    50,
-    true
-    )
+    if (municion > 0) {
+        music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
+        torpedo = sprites.createProjectileFromSprite(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . 7 d d 7 . . . . . . 
+            . . . . . 7 7 d d 7 7 . . . . . 
+            . . . . . 7 7 d d 7 7 . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, falcon, 0, -68)
+        animation.runImageAnimation(
+        torpedo,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . 7 d d 7 . . . . . . 
+            . . . . . 7 7 d d 7 7 . . . . . 
+            . . . . . 7 7 d d 7 7 . . . . . 
+            . . . . . . . 2 5 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . . 5 5 . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . . d d . . . . . . . 
+            . . . . . . 7 d d 7 . . . . . . 
+            . . . . . 7 7 d d 7 7 . . . . . 
+            . . . . . 7 7 d d 7 7 . . . . . 
+            . . . . . . . 5 2 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        50,
+        true
+        )
+        municion += -1
+    }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.disintegrate, 100)
     sprites.destroy(sprite, effects.fire, 100)
     info.changeScoreBy(1)
+    if (info.score() % 10 == 0) {
+        info.changeLifeBy(1)
+    }
+    if (info.score() % 20 == 0) {
+        velocidadFeo1 += 10
+    }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.disintegrate, 100)
     info.changeLifeBy(-1)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.municion, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite, effects.smiles, 200)
+    municion += 10
+})
 let feo1: Sprite = null
+let carga: Sprite = null
 let stars: Sprite = null
 let torpedo: Sprite = null
 let falcon: Sprite = null
+let municion = 0
+let velocidadFeo1 = 0
 inicio1()
 game.onUpdateInterval(2000, function () {
     stars = sprites.create(img`
@@ -511,6 +530,29 @@ game.onUpdateInterval(2000, function () {
     stars.vy = randint(10, 30)
     stars.setFlag(SpriteFlag.AutoDestroy, true)
 })
+game.onUpdateInterval(randint(8000, 12000), function () {
+    carga = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . 5 5 5 5 5 5 5 5 . . . 
+        . . . . 5 2 2 2 2 2 2 5 5 . . . 
+        . . . 5 2 2 2 2 2 2 5 2 5 . . . 
+        . . 5 2 2 2 2 2 2 5 2 2 5 . . . 
+        . 5 2 2 2 2 2 2 5 2 2 2 5 . . . 
+        . 5 5 5 5 5 5 5 5 2 2 2 5 . . . 
+        . 5 2 2 2 4 2 2 5 2 2 2 5 . . . 
+        . 5 2 2 4 2 2 2 5 2 2 2 5 . . . 
+        . 5 2 f f f 2 2 5 2 2 2 5 . . . 
+        . 5 2 f f f 2 2 5 2 2 5 . . . . 
+        . 5 2 f f f 2 2 5 2 5 . . . . . 
+        . 5 2 2 2 2 2 2 5 5 . . . . . . 
+        . 5 5 5 5 5 5 5 5 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.municion)
+    carga.setPosition(randint(0, scene.screenWidth()), 0)
+    carga.vy = 80
+    carga.setFlag(SpriteFlag.AutoDestroy, true)
+})
 game.onUpdateInterval(1000, function () {
     feo1 = sprites.create(img`
         . . . . 2 2 2 2 . . . . . . . . 
@@ -532,10 +574,10 @@ game.onUpdateInterval(1000, function () {
         `, SpriteKind.Enemy)
     if (randint(0, 1) == 0) {
         feo1.setPosition(randint(0, scene.screenWidth()), 0)
-        feo1.vy = randint(20, 40)
+        feo1.vy = velocidadFeo1
     } else {
         feo1.setPosition(randint(0, scene.screenWidth()), scene.screenHeight())
-        feo1.vy = randint(-20, -40)
+        feo1.vy = -1 * velocidadFeo1
     }
     feo1.setFlag(SpriteFlag.AutoDestroy, true)
     animation.runImageAnimation(
@@ -548,9 +590,9 @@ game.onUpdateInterval(1000, function () {
         . . . . . . . 2 . . . . . 2 . 2 
         . . . . . . 2 2 2 2 2 . . 2 . . 
         . 2 2 . . 2 a a a a a 2 2 . . . 
-        2 . . 2 . 2 a a a a a 2 . . . . 
-        . . . . 2 2 a a a a a 2 . . . . 
-        . . . . . 2 a a a a a 2 . . . . 
+        2 . . 2 . 2 a 1 1 1 a 2 . . . . 
+        . . . . 2 2 1 1 f 1 1 2 . . . . 
+        . . . . . 2 a 1 1 1 a 2 . . . . 
         . . . . 2 2 a a a a a 2 . . . . 
         . . . 2 . . 2 2 2 2 2 . 2 . . . 
         . . 2 . . . . 2 . 2 . . 2 . 2 2 
@@ -558,16 +600,16 @@ game.onUpdateInterval(1000, function () {
         . . . . . . 2 . . 2 . . . . . 2 
         . . . . . 2 . . . . 2 . . . . . 
         `,img`
-        . . . . . . . . . . . 2 . . . . 
-        . . . . . . . . . . 2 . . . . . 
-        . . . . . . . . . 2 . . . . . . 
-        . . . . . . . . 2 . . . . . . . 
+        . . . . . . . . 2 2 2 . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . . 2 . . . . . . . . 
+        . . . . . . . 2 . . . . . . . . 
         2 . . . . . . 2 . . . . . . . . 
         . 2 . . . . 2 2 2 2 2 . . . . 2 
         . . 2 . . 2 a a a a a 2 2 . . 2 
-        . . . 2 . 2 a a a a a 2 . 2 . 2 
-        . . . . 2 2 a a a a a 2 . . 2 . 
-        . . . . . 2 a a a a a 2 . . . . 
+        . . . 2 . 2 a 1 1 1 a 2 . 2 . 2 
+        . . . . 2 2 1 1 f 1 1 2 . . 2 . 
+        . . . . . 2 a 1 1 1 a 2 . . . . 
         . . . . 2 2 a a a a a 2 . . . . 
         . . 2 2 . . 2 2 2 2 2 . 2 2 2 . 
         2 2 . . . . . 2 . 2 . . . . . 2 
